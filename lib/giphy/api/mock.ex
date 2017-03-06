@@ -6,12 +6,21 @@ defmodule Giphy.API.Mock do
       # config/test.exs
       config :giphy, api: Giphy.API.Mock
 
+  Then, perform requests against the mock:
+
+      Giphy.search("invalid_api_key")
+      Giphy.search("not_found")
+      Giphy.search("error")
+      Giphy.search("valid")
+  
+  ### Make Your Own
+
   If this mock does not suit your needs, define your own and use it instead:
 
       defmodule MyApp.Giphy.Mock do
         @behaviour Giphy.API
 
-        def get("/search", _headers, [params: params]) do
+        def get("/search", _headers, [{:params, params} | _]) do
           # ...
         end
       end
@@ -28,10 +37,11 @@ defmodule Giphy.API.Mock do
   Supports the following search terms:
 
   - "invalid_api_key": Returns an unauthorized `HTTPoison.Response`.
+  - "not_found": Returns a 404 `HTTPoison.Response`.
   - "error": Returns an `HTTPoison.Error`.
   - "valid": Returns a single GIF result.
   """
-  def get("/search", _headers, [params: params]) do
+  def get("/search", _headers, [{:params, params} | _]) do
     do_search(params[:q])
   end
 

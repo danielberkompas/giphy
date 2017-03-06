@@ -7,7 +7,10 @@ defmodule Giphy do
   You will need to set the Giphy API key. The `:api_key` config option accepts
   both a `String` and a `{:system, "ENV_VAR"}` tuple.
 
+      config :giphy, api_key: "YOUR_API_KEY"
+      # or ...
       config :giphy, api_key: {:system, "ENV_VAR"}
+      
 
   ## Usage
   
@@ -31,9 +34,7 @@ defmodule Giphy do
   This library includes a mock API module for testing purposes. In your
   `config/text.exs`, set Giphy to use the mock:
 
-      ```
       config :giphy, api: Giphy.API.Mock
-      ```
 
   Your tests will then use the mock instead of making HTTP requests. See 
   `Giphy.API.Mock` for more information.
@@ -63,7 +64,12 @@ defmodule Giphy do
     api = get_api_module()
     terms = URI.encode(terms)
 
-    case api.get("/search", [], [params: [{:q, terms}|params]]) do
+    options = [
+      params: [{:q, terms}|params],
+      hackney: [pool: :giphy]
+    ]
+
+    case api.get("/search", [], options) do
       {:ok, %{status_code: 200, body: body}} ->
         page =
           %Giphy.Page{
