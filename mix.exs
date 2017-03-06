@@ -8,18 +8,27 @@ defmodule Giphy.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps(),
+     package: package(),
     
      # Docs
      name: "Giphy",
      source_url: "https://github.com/danielberkompas/giphy",
      homepage_url: "http://github.com/danielberkompas/giphy",
-     docs: [main: "Giphy", extras: ["README.md"]]
+     docs: [main: "Giphy", extras: ["README.md"]],
     ]
   end
 
   def application do
     [extra_applications: [:logger, :httpoison],
      mod: {Giphy.Application, []}]
+  end
+
+  def package do
+    [maintainers: ["Daniel Berkompas"],
+     licenses: ["MIT"],
+     links: %{
+       "Github" => "https://github.com/danielberkompas/giphy"
+     }]
   end
 
   defp deps do
