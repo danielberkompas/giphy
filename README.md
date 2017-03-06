@@ -1,4 +1,5 @@
 # Giphy
+[![Inline docs](https://inch-ci.org/github/danielberkompas/giphy.svg)](https://inch-ci.org/github/danielberkompas/giphy)
 
 An Elixir wrapper around the [Giphy API](https://github.com/Giphy/GiphyAPI).
 
