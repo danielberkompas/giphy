@@ -27,6 +27,6 @@ defmodule Giphy.Mixfile do
      {:poison, "~> 3.1"},
      {:calendar, "~> 0.16"},
      {:ex_doc, "~> 0.12", only: :dev, runtime: false},
-     {:inch_ex, "~> 0.5", only: [:dev, :test], runtime: false}]
+     {:inch_ex, "~> 0.5", only: :docs, runtime: false}]
   end
 end
