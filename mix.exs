@@ -12,6 +12,7 @@ defmodule Giphy.Mixfile do
     
      # Docs
      name: "Giphy",
+     description: "Elixir wrapper for the Giphy API",
      source_url: "https://github.com/danielberkompas/giphy",
      homepage_url: "http://github.com/danielberkompas/giphy",
      docs: [main: "Giphy", extras: ["README.md"]],
