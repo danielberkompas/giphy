@@ -1,22 +1,26 @@
 defmodule Giphy.Application do
-  # See http://elixir-lang.org/docs/stable/elixir/Application.html
-  # for more information on OTP Applications
   @moduledoc false
 
   use Application
 
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
+    validate_config!()
 
-    # Define workers and child supervisors to be supervised
     children = [
-      # Starts a worker by calling: Giphy.Worker.start_link(arg1, arg2, arg3)
-      # worker(Giphy.Worker, [arg1, arg2, arg3]),
+      # Custom Hackney pool for requests
+      :hackney_pool.child_spec(:giphy, [timeout: 15000, max_connections: 100])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Giphy.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  defp validate_config! do
+    unless Giphy.Config.api_key() do
+      raise Giphy.ConfigError.exception(:invalid_api_key)
+    end
   end
 end
