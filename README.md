@@ -1,4 +1,5 @@
 # Giphy
+[![Build Status](https://travis-ci.org/danielberkompas/giphy.svg?branch=master)](https://travis-ci.org/danielberkompas/giphy)
 [![Inline docs](https://inch-ci.org/github/danielberkompas/giphy.svg)](https://inch-ci.org/github/danielberkompas/giphy)
 
 An Elixir wrapper around the [Giphy API](https://github.com/Giphy/GiphyAPI).
